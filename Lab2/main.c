@@ -24,12 +24,14 @@ int main(void)
 	SysTick_Init();
 	GPIOInitLed();
 	handleTransistor(1);
-	for(int i = 1; i > 9; i++){
-		acendeLed(i);
-		SysTick_Wait1ms(5000);
-		if (i == 8){
-			i = 1;
-		}
+	int i = 1;
+	while(1){
+			acendeLed(i);
+			SysTick_Wait1ms(5000);
+			i++;
+			if(i > 8){
+					i = 1;
+			}
 	}
 }
 
