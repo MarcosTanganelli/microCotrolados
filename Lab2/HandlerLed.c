@@ -1,7 +1,7 @@
 #include "tm4c1294ncpdt.h"
 #include <stdint.h>
 
-void handleTransistor(int signal){
+void handleTransistorLed(int signal){
 	if(signal == 1){
 		// liga transistor
 		GPIO_PORTP_DATA_R = 0x20;  // 0010 0000 acende o 5 pino
@@ -27,17 +27,24 @@ void GPIOInitLed(void)
 	  // Configuração do Transistor 
 		// ======================
 		// Desbloqueia PORTP
+		// Desbloqueia a PORTP
 		GPIO_PORTP_LOCK_R = 0x4C4F434B;
+
 		// Habilita o pino PP5
-		GPIO_PORTP_CR_R = 0b00010000;
+		GPIO_PORTP_CR_R = 0x20;  // Bit 5
+
 		// Desativa função analógica
 		GPIO_PORTP_AMSEL_R = 0;
-	  //Desativa função alternativa
+
+		// Desativa função alternativa
 		GPIO_PORTP_AFSEL_R = 0;
-		// Habilita função digital em PP5
-		GPIO_PORTB_AHB_DEN_R  = 0b00010000;
+
+		// Habilita função digital no pino PP5
+		GPIO_PORTP_DEN_R = 0x20;  // Bit 5
+
 		// Define direção como saída para PP5
-		GPIO_PORTP_DIR_R  = 0b00010000;		
+		GPIO_PORTP_DIR_R = 0x20;  // Bit 5
+
 
 		// ======================
 	  // Configuração da PORTA
@@ -76,38 +83,42 @@ void GPIOInitLed(void)
 	}
 
 void acendeLed(int numLeds){
-	handleTransistor(1);
+
 	switch(numLeds){
 		case 1:
-      GPIO_PORTA_AHB_DATA_R = 0b10000000;    
+      GPIO_PORTA_AHB_DATA_R = 0b10000000;   
+			GPIO_PORTQ_DATA_R = 0b00000000;		
 			break;
 		case 2:
 			GPIO_PORTA_AHB_DATA_R = 0b11000000;  
+			GPIO_PORTQ_DATA_R = 0b00000000;	
 			break;
 		case 3:
 			GPIO_PORTA_AHB_DATA_R = 0b11100000;  
+			GPIO_PORTQ_DATA_R = 0b00000000;	
 			break;
 		case 4:
-			GPIO_PORTA_AHB_DATA_R = 0b11110000;  
+			GPIO_PORTA_AHB_DATA_R = 0b11110000;
+			GPIO_PORTQ_DATA_R = 0b00000000;			
 			break;
 		case 5:
 			GPIO_PORTA_AHB_DATA_R = 0b11110000;
-			GPIO_PORTQ_DATA_R = 0b00000001;  		
+			GPIO_PORTQ_DATA_R = 0b00001000; 
+ 		
 			break;
 		case 6:
 			GPIO_PORTA_AHB_DATA_R = 0b11110000;
-			GPIO_PORTQ_DATA_R = 0b00000011;  
+			GPIO_PORTQ_DATA_R = 0b00001100;  
 			break;
 		case 7:
 			GPIO_PORTA_AHB_DATA_R = 0b11110000;
-			GPIO_PORTQ_DATA_R = 0b00000111;  
+			GPIO_PORTQ_DATA_R = 0b00001110;   
 			break;
 		case 8:
 			GPIO_PORTA_AHB_DATA_R = 0b11110000;
 			GPIO_PORTQ_DATA_R = 0b00001111;  
 			break;
 		default:
-			handleTransistor(0);
 			break;
 	}
 }

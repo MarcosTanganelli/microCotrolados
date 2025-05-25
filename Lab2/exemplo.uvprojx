@@ -133,7 +133,7 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>0</Capability>
+            <Capability>1</Capability>
             <DriverSelection>-1</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
@@ -412,6 +412,26 @@
               <FileName>HandlerLed.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HandlerLed.c</FilePath>
+            </File>
+            <File>
+              <FileName>HandlerLCD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HandlerLCD.c</FilePath>
+            </File>
+            <File>
+              <FileName>HandlerTeclado.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HandlerTeclado.c</FilePath>
+            </File>
+            <File>
+              <FileName>HandlerLedPlaca.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HandlerLedPlaca.c</FilePath>
+            </File>
+            <File>
+              <FileName>HandlerMotor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HandlerMotor.c</FilePath>
             </File>
           </Files>
         </Group>

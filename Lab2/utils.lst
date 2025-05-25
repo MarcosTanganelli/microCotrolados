@@ -730,191 +730,190 @@ ARM Macro Assembler    Page 12
                        ----------- 
   239 00000128                 EXPORT           SysTick_Init
   240 00000128                 EXPORT           SysTick_Wait1ms
-  241 00000128                 EXPORT           SysTick_Wait1us
-  242 00000128         ;------------SysTick_Init------------
-  243 00000128         ; Configura o sistema para utilizar o SysTick para delay
+  241 00000128         ;------------SysTick_Init------------
+  242 00000128         ; Configura o sistema para utilizar o SysTick para delay
                        s
-  244 00000128         ; Entrada: Nenhum
-  245 00000128         ; Saída: Nenhum
-  246 00000128         ; Modifica: R0, R1
-  247 00000128         SysTick_Init
-  248 00000128 492A            LDR              R1, =NVIC_ST_CTRL_R ; R1 = &NVI
+  243 00000128         ; Entrada: Nenhum
+  244 00000128         ; Saída: Nenhum
+  245 00000128         ; Modifica: R0, R1
+  246 00000128         SysTick_Init
+  247 00000128 492A            LDR              R1, =NVIC_ST_CTRL_R ; R1 = &NVI
                                                             C_ST_CTRL_R (pontei
                                                             ro)
-  249 0000012A F04F 0000       MOV              R0, #0      ; desabilita Systic
+  248 0000012A F04F 0000       MOV              R0, #0      ; desabilita Systic
                                                             k durante a configu
                                                             ração
-  250 0000012E 6008            STR              R0, [R1]    ; escreve no endere
+  249 0000012E 6008            STR              R0, [R1]    ; escreve no endere
                                                             ço de memória do pe
                                                             riférico
-  251 00000130 4929            LDR              R1, =NVIC_ST_RELOAD_R ; R1 = &N
+  250 00000130 4929            LDR              R1, =NVIC_ST_RELOAD_R ; R1 = &N
                                                             VIC_ST_RELOAD_R (po
                                                             inteiro)
-  252 00000132 F06F 407F       LDR              R0, =0x00FFFFFF ;    ; valor má
+  251 00000132 F06F 407F       LDR              R0, =0x00FFFFFF ;    ; valor má
                                                             ximo de recarga 2^2
                                                             4 ticks
-  253 00000136 6008            STR              R0, [R1]    ; escreve no endere
+  252 00000136 6008            STR              R0, [R1]    ; escreve no endere
                                                             ço de memória do pe
                                                             riférico o NVIC_ST_
                                                             RELOAD_M
-  254 00000138 4928            LDR              R1, =NVIC_ST_CURRENT_R ; R1 = &
+  253 00000138 4928            LDR              R1, =NVIC_ST_CURRENT_R ; R1 = &
                                                             NVIC_ST_CURRENT_R (
                                                             ponteiro)
-  255 0000013A F04F 0000       MOV              R0, #0      ; qualquer escrita 
+  254 0000013A F04F 0000       MOV              R0, #0      ; qualquer escrita 
                                                             no endereço NVIC_ST
                                                             _CURRENT_R o limpa
-  256 0000013E 6008            STR              R0, [R1]    ; limpa o contador
-  257 00000140 4924            LDR              R1, =NVIC_ST_CTRL_R ; habilita 
+  255 0000013E 6008            STR              R0, [R1]    ; limpa o contador
+  256 00000140 4924            LDR              R1, =NVIC_ST_CTRL_R ; habilita 
                                                             o SysTick com o clo
                                                             ck do core
-  258 00000142 F04F 0005       MOV              R0, #0x05   ; ENABLE | CLK_SRC
-  259 00000146 6008            STR              R0, [R1]    ; Seta os bits de E
+  257 00000142 F04F 0005       MOV              R0, #0x05   ; ENABLE | CLK_SRC
+  258 00000146 6008            STR              R0, [R1]    ; Seta os bits de E
                                                             NABLE e CLK_SRC na 
                                                             memória
-  260 00000148 4770            BX               LR
-  261 0000014A         
-  262 0000014A         ;------------SysTick_Wait------------
-  263 0000014A         ; Atraso de tempo utilizando processador ocupado
-  264 0000014A         ; Entrada: R0 -> parâmetro de delay em unidades do clock
+  259 00000148 4770            BX               LR
+  260 0000014A         
+  261 0000014A         ;------------SysTick_Wait------------
+  262 0000014A         ; Atraso de tempo utilizando processador ocupado
+  263 0000014A         ; Entrada: R0 -> parâmetro de delay em unidades do clock
                         do core (12.5ns)
-  265 0000014A         ; Saída: Nenhum
+  264 0000014A         ; Saída: Nenhum
+  265 0000014A         ; Modifica: R0
 
 
 
 ARM Macro Assembler    Page 13 
 
 
-  266 0000014A         ; Modifica: R0
-  267 0000014A         SysTick_Wait
-  268 0000014A B40A            PUSH             {R1, R3}    ; Salva os valores 
+  266 0000014A         SysTick_Wait
+  267 0000014A B40A            PUSH             {R1, R3}    ; Salva os valores 
                                                             de R1 e R3 externos
                                                             
-  269 0000014C 4922            LDR              R1, =NVIC_ST_RELOAD_R ; R1 = &N
+  268 0000014C 4922            LDR              R1, =NVIC_ST_RELOAD_R ; R1 = &N
                                                             VIC_ST_RELOAD_RSUB 
                                                             R0 (ponteiro)
-  270 0000014E F1A0 0001       SUB              R0, #1
-  271 00000152 6008            STR              R0, [R1]    ; delay-1, número d
+  269 0000014E F1A0 0001       SUB              R0, #1
+  270 00000152 6008            STR              R0, [R1]    ; delay-1, número d
                                                             e contagens para es
                                                             perar
-  272 00000154 491F            LDR              R1, =NVIC_ST_CTRL_R ; R1 = &NVI
+  271 00000154 491F            LDR              R1, =NVIC_ST_CTRL_R ; R1 = &NVI
                                                             C_ST_CTRL_R
-  273 00000156         SysTick_Wait_loop
-  274 00000156 680B            LDR              R3, [R1]    ; R3 = &NVIC_ST_CTR
+  272 00000156         SysTick_Wait_loop
+  273 00000156 680B            LDR              R3, [R1]    ; R3 = &NVIC_ST_CTR
                                                             L_R (ponteiro)
-  275 00000158 F413 3380       ANDS             R3, R3, #0x00010000 ; O bit COU
+  274 00000158 F413 3380       ANDS             R3, R3, #0x00010000 ; O bit COU
                                                             NT está setado? (Bi
                                                             t 16)
-  276 0000015C D0FB            BEQ              SysTick_Wait_loop ; Se sim perm
+  275 0000015C D0FB            BEQ              SysTick_Wait_loop ; Se sim perm
                                                             anece no loop
-  277 0000015E BC0A            POP              {R1, R3}    ; Restaura
-  278 00000160 4770            BX               LR          ; Se não, retorna
-  279 00000162         
-  280 00000162         ;------------SysTick_Wait1ms------------
-  281 00000162         ; tempo de atraso usando processador ocupado. Assume um 
+  276 0000015E BC0A            POP              {R1, R3}    ; Restaura
+  277 00000160 4770            BX               LR          ; Se não, retorna
+  278 00000162         
+  279 00000162         ;------------SysTick_Wait1ms------------
+  280 00000162         ; tempo de atraso usando processador ocupado. Assume um 
                        clock de 80 MHz
-  282 00000162         ; Entrada: R0 --> Número de vezes para contar 1ms.
-  283 00000162         ; Saída: Não tem
-  284 00000162         ; Modifica: R0
-  285 00000162 00013880 
+  281 00000162         ; Entrada: R0 --> Número de vezes para contar 1ms.
+  282 00000162         ; Saída: Não tem
+  283 00000162         ; Modifica: R0
+  284 00000162 00013880 
                        DELAY1MS
                                EQU              80000       ; número de ciclos 
                                                             de clock para conta
                                                             r 1ms (assumindo 80
                                                              MHz)
-  286 00000162         ; 80000 x 12,5 ns = 1 ms
-  287 00000162         
-  288 00000162         SysTick_Wait1ms
-  289 00000162 B510            PUSH             {R4, LR}    ; salva o valor atu
+  285 00000162         ; 80000 x 12,5 ns = 1 ms
+  286 00000162         
+  287 00000162         SysTick_Wait1ms
+  288 00000162 B510            PUSH             {R4, LR}    ; salva o valor atu
                                                             al de R4 e Link Reg
                                                             ister
-  290 00000164 0004            MOVS             R4, R0      ; R4 = R0  numEsper
+  289 00000164 0004            MOVS             R4, R0      ; R4 = R0  numEsper
                                                             asRestantes com atu
                                                             alização dos flags
-  291 00000166 D004            BEQ              SysTick_Wait1ms_done ; Se o num
+  290 00000166 D004            BEQ              SysTick_Wait1ms_done ; Se o num
                                                             EsperasRestantes ==
                                                              0, vai para o fim
-  292 00000168         SysTick_Wait1ms_loop
-  293 00000168 481D            LDR              R0, =DELAY1MS ; R0 = DELAY1MS (
+  291 00000168         SysTick_Wait1ms_loop
+  292 00000168 481D            LDR              R0, =DELAY1MS ; R0 = DELAY1MS (
                                                             número de ticks par
                                                             a contar 1ms)
-  294 0000016A F7FF FFEE       BL               SysTick_Wait ; chama a rotina p
+  293 0000016A F7FF FFEE       BL               SysTick_Wait ; chama a rotina p
                                                             ara esperar por 1ms
                                                             
-  295 0000016E 1E64            SUBS             R4, R4, #1  ; R4 = R4 - 1; numE
+  294 0000016E 1E64            SUBS             R4, R4, #1  ; R4 = R4 - 1; numE
                                                             sperasRestantes--
-  296 00000170 D8FA            BHI              SysTick_Wait1ms_loop ; se (numE
+  295 00000170 D8FA            BHI              SysTick_Wait1ms_loop ; se (numE
+                                                            sperasRestantes > 0
 
 
 
 ARM Macro Assembler    Page 14 
 
 
-                                                            sperasRestantes > 0
                                                             ), espera mais 1ms
-  297 00000172         SysTick_Wait1ms_done
-  298 00000172 BD10            POP              {R4, PC}    ;return
-  299 00000174         
-  300 00000174         ;------------SysTick_Wait1us------------
-  301 00000174         ; tempo de atraso usando processador ocupado. Assume um 
+  296 00000172         SysTick_Wait1ms_done
+  297 00000172 BD10            POP              {R4, PC}    ;return
+  298 00000174         
+  299 00000174         ;------------SysTick_Wait1us------------
+  300 00000174         ; tempo de atraso usando processador ocupado. Assume um 
                        clock de 80 MHz
-  302 00000174         ; Entrada: R0 --> Número de vezes para contar 1us.
-  303 00000174         ; Saída: Não tem
-  304 00000174         ; Modifica: R0
-  305 00000174 00000050 
+  301 00000174         ; Entrada: R0 --> Número de vezes para contar 1us.
+  302 00000174         ; Saída: Não tem
+  303 00000174         ; Modifica: R0
+  304 00000174 00000050 
                        DELAY1US
                                EQU              80          ; número de ciclos 
                                                             de clock para conta
                                                             r 1ms (assumindo 80
                                                              MHz)
-  306 00000174         ; 80000 x 12,5 ns = 1 ms
-  307 00000174         
-  308 00000174         SysTick_Wait1us
-  309 00000174 B510            PUSH             {R4, LR}    ; salva o valor atu
+  305 00000174         ; 80000 x 12,5 ns = 1 ms
+  306 00000174         
+  307 00000174         SysTick_Wait1us
+  308 00000174 B510            PUSH             {R4, LR}    ; salva o valor atu
                                                             al de R4 e Link Reg
                                                             ister
-  310 00000176 0004            MOVS             R4, R0      ; R4 = R0  numEsper
+  309 00000176 0004            MOVS             R4, R0      ; R4 = R0  numEsper
                                                             asRestantes com atu
                                                             alização dos flags
-  311 00000178 D005            BEQ              SysTick_Wait1us_done ; Se o num
+  310 00000178 D005            BEQ              SysTick_Wait1us_done ; Se o num
                                                             EsperasRestantes ==
                                                              0, vai para o fim
-  312 0000017A         SysTick_Wait1us_loop
-  313 0000017A F04F 0050       LDR              R0, =DELAY1US ; R0 = DELAY1MS (
+  311 0000017A         SysTick_Wait1us_loop
+  312 0000017A F04F 0050       LDR              R0, =DELAY1US ; R0 = DELAY1MS (
                                                             número de ticks par
                                                             a contar 1ms)
-  314 0000017E F7FF FFE4       BL               SysTick_Wait ; chama a rotina p
+  313 0000017E F7FF FFE4       BL               SysTick_Wait ; chama a rotina p
                                                             ara esperar por 1ms
                                                             
-  315 00000182 1E64            SUBS             R4, R4, #1  ; R4 = R4 - 1; numE
+  314 00000182 1E64            SUBS             R4, R4, #1  ; R4 = R4 - 1; numE
                                                             sperasRestantes--
-  316 00000184 D8F9            BHI              SysTick_Wait1us_loop ; se (numE
+  315 00000184 D8F9            BHI              SysTick_Wait1us_loop ; se (numE
                                                             sperasRestantes > 0
                                                             ), espera mais 1ms
-  317 00000186         SysTick_Wait1us_done
-  318 00000186 BD10            POP              {R4, PC}    ;return
+  316 00000186         SysTick_Wait1us_done
+  317 00000186 BD10            POP              {R4, PC}    ;return
+  318 00000188         
   319 00000188         
-  320 00000188         
-  321 00000188         ; ------------------------------------------------------
+  320 00000188         ; ------------------------------------------------------
                        --------------------------------------------------------
                        -----------
-  322 00000188         ; Fim do Arquivo
-  323 00000188         ; ------------------------------------------------------
+  321 00000188         ; Fim do Arquivo
+  322 00000188         ; ------------------------------------------------------
                        --------------------------------------------------------
                        -----------
-  324 00000188                 ALIGN                        ;Garante que o fim 
+  323 00000188                 ALIGN                        ;Garante que o fim 
                                                             da seção está alinh
                                                             ada 
-  325 00000188                 END                          ;Fim do arquivo
+  324 00000188                 END                          ;Fim do arquivo
               400FE0B0 
               400FE07C 
               400FE050 
+              400FE144 
 
 
 
 ARM Macro Assembler    Page 15 
 
 
-              400FE144 
               400FE160 
               000FFC00 
               400FE164 
@@ -934,11 +933,11 @@ ARM Macro Assembler    Page 15
               E000E014 
               E000E018 
               00013880 
-Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --depen
-d=.\objects\utils.d -o.\objects\utils.o -IC:\Users\Marco\AppData\Local\Arm\Pack
-s\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129 --predefine="__EVAL SETA 1" --pred
-efine="__UVISION_VERSION SETA 536" --predefine="TM4C1294NCPDT SETA 1" --list=.\
-listings\utils.lst utils.s
+Command Line: --debug --liston --xref --cpu=Cortex-M4 --fpu=VFPv2 --apcs=/inter
+work --depend=.\objects\utils.d -o.\objects\utils.o -IC:\Keil_v5\ARM\ARMCLANG\i
+nclude -IC:\Users\Marco\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Incl
+ude\TM4C129 --predefine="__UVISION_VERSION SETA 536" --predefine="TM4C1294NCPDT
+ SETA 1" utils.s
 
 
 
@@ -1078,7 +1077,7 @@ Relocatable symbols
 
 Symbol: SysTick_Init
    Definitions
-      At line 247 in file utils.s
+      At line 246 in file utils.s
    Uses
       At line 239 in file utils.s
 Comment: SysTick_Init used once
@@ -1086,16 +1085,16 @@ SysTick_Wait 0000014A
 
 Symbol: SysTick_Wait
    Definitions
-      At line 267 in file utils.s
+      At line 266 in file utils.s
    Uses
-      At line 294 in file utils.s
-      At line 314 in file utils.s
+      At line 293 in file utils.s
+      At line 313 in file utils.s
 
 SysTick_Wait1ms 00000162
 
 Symbol: SysTick_Wait1ms
    Definitions
-      At line 288 in file utils.s
+      At line 287 in file utils.s
    Uses
       At line 240 in file utils.s
 Comment: SysTick_Wait1ms used once
@@ -1103,33 +1102,33 @@ SysTick_Wait1ms_done 00000172
 
 Symbol: SysTick_Wait1ms_done
    Definitions
-      At line 297 in file utils.s
+      At line 296 in file utils.s
    Uses
-      At line 291 in file utils.s
+      At line 290 in file utils.s
 Comment: SysTick_Wait1ms_done used once
 SysTick_Wait1ms_loop 00000168
 
 Symbol: SysTick_Wait1ms_loop
    Definitions
-      At line 292 in file utils.s
+      At line 291 in file utils.s
    Uses
-      At line 296 in file utils.s
+      At line 295 in file utils.s
 Comment: SysTick_Wait1ms_loop used once
 SysTick_Wait1us 00000174
 
 Symbol: SysTick_Wait1us
    Definitions
-      At line 308 in file utils.s
+      At line 307 in file utils.s
    Uses
-      At line 241 in file utils.s
-Comment: SysTick_Wait1us used once
+      None
+Comment: SysTick_Wait1us unused
 SysTick_Wait1us_done 00000186
 
 Symbol: SysTick_Wait1us_done
    Definitions
-      At line 317 in file utils.s
+      At line 316 in file utils.s
    Uses
-      At line 311 in file utils.s
+      At line 310 in file utils.s
 Comment: SysTick_Wait1us_done used once
 SysTick_Wait1us_loop 0000017A
 
@@ -1141,17 +1140,17 @@ ARM Macro Assembler    Page 4 Alphabetic symbol ordering
 Relocatable symbols
 
    Definitions
-      At line 312 in file utils.s
+      At line 311 in file utils.s
    Uses
-      At line 316 in file utils.s
+      At line 315 in file utils.s
 Comment: SysTick_Wait1us_loop used once
 SysTick_Wait_loop 00000156
 
 Symbol: SysTick_Wait_loop
    Definitions
-      At line 273 in file utils.s
+      At line 272 in file utils.s
    Uses
-      At line 276 in file utils.s
+      At line 275 in file utils.s
 Comment: SysTick_Wait_loop used once
 23 symbols
 
@@ -1164,17 +1163,17 @@ DELAY1MS 00013880
 
 Symbol: DELAY1MS
    Definitions
-      At line 285 in file utils.s
+      At line 284 in file utils.s
    Uses
-      At line 293 in file utils.s
+      At line 292 in file utils.s
 Comment: DELAY1MS used once
 DELAY1US 00000050
 
 Symbol: DELAY1US
    Definitions
-      At line 305 in file utils.s
+      At line 304 in file utils.s
    Uses
-      At line 313 in file utils.s
+      At line 312 in file utils.s
 Comment: DELAY1US used once
 FXTAL 017D7840
 
@@ -1217,15 +1216,15 @@ Symbol: NVIC_ST_CTRL_R
    Definitions
       At line 235 in file utils.s
    Uses
-      At line 248 in file utils.s
-      At line 257 in file utils.s
+      At line 247 in file utils.s
+      At line 256 in file utils.s
 
 
 
 ARM Macro Assembler    Page 2 Alphabetic symbol ordering
 Absolute symbols
 
-      At line 272 in file utils.s
+      At line 271 in file utils.s
 
 NVIC_ST_CURRENT_R E000E018
 
@@ -1233,7 +1232,7 @@ Symbol: NVIC_ST_CURRENT_R
    Definitions
       At line 237 in file utils.s
    Uses
-      At line 254 in file utils.s
+      At line 253 in file utils.s
 Comment: NVIC_ST_CURRENT_R used once
 NVIC_ST_RELOAD_R E000E014
 
@@ -1241,8 +1240,8 @@ Symbol: NVIC_ST_RELOAD_R
    Definitions
       At line 236 in file utils.s
    Uses
-      At line 251 in file utils.s
-      At line 269 in file utils.s
+      At line 250 in file utils.s
+      At line 268 in file utils.s
 
 PSYSDIV 00000005
 
@@ -1555,4 +1554,4 @@ Absolute symbols
       At line 227 in file utils.s
 
 43 symbols
-402 symbols in table
+401 symbols in table
