@@ -24,6 +24,7 @@ char scanKeypad(void);
 void GPIOInitTeclado(void);
 void GPIOInitLedPlaca(void);
 void GPIOInitMotor(void);
+void TurnOnMotor(int sentido, int velocidade);
 
 void wishedMessage(int grauValue, int sentido, int velocidade, int fim){
 	char message[2][16];
@@ -52,7 +53,6 @@ void wishedMessage(int grauValue, int sentido, int velocidade, int fim){
 		//sprintf(message[1], "Velo:%s----------", velocidade == 0 ? "P" : "MP");
 
 
-
 int main(void)
 {
 	PLL_Init();
@@ -63,20 +63,22 @@ int main(void)
 	GPIOInitTeclado();
 	GPIOInitMotor();
 	handleTransistorLed(1);
+	
 	int i = 1;
 	while(1){
-			//char tecla = scanKeypad();
-        //if (tecla != 0) {
-					// Processa imediatamente
-				//	wishedMessage(tecla - '0', 1, 15, 0);
+	//		char tecla = scanKeypad();
+  //      if (tecla != 0) {
+					 //Processa imediatamente
+	//				wishedMessage(tecla - '0', 1, 15, 0);
 					// Espera até tecla ser solta, para evitar múltiplas leituras rápidas
-        //}
-			//acendeLed(i);
-			//SysTick_Wait1ms(2000);
-			//i++;
-			//if(i > 8){
-			//		i = 1;
-			//}
+  //      }
+			TurnOnMotor(1, 1);
+			acendeLed(i);
+			SysTick_Wait1ms(2000);
+			i++;
+			if(i > 8){
+					i = 1;
+			}
 	}
 }
 
