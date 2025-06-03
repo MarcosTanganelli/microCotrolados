@@ -1,5 +1,6 @@
 #include "tm4c1294ncpdt.h"
 #include <stdint.h>
+#include "globals.h"
 
 void SysTick_Wait1ms(uint32_t delay);
 void SysTick_Wait1us(uint32_t delay);
@@ -38,8 +39,12 @@ void GPIOInitLedPlaca(){
 
 }
 
-
 void TIMER2A_Handler(void){
     TIMER2_ICR_R = 0x01;  // Limpa flag
-    GPIO_PORTN_DATA_R ^= 0x01;  // Inverte o LED
+
+    if (flagPiscarLed) {
+        GPIO_PORTN_DATA_R ^= 0x01;  // Pisca o LED
+    } else {
+        GPIO_PORTN_DATA_R &= ~0x01;  // Garante que o LED fique apagado
+    }
 }

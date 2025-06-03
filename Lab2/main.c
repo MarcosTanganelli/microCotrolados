@@ -8,7 +8,9 @@
 #include <stdio.h>
 #include "tm4c1294ncpdt.h"
 #include <string.h>
+#include "globals.h"
 
+volatile uint8_t flagPiscarLed = 0;
 void PLL_Init(void);
 void SysTick_Init(void);
 void SysTick_Wait1ms(uint32_t delay);
@@ -17,40 +19,13 @@ void GPIO_Init(void);
 
 void handleTransistorLed(int signal);
 void GPIOInitLed(void);
-void acendeLed(int numLeds);
 void insertMessageLCD(char message[2][16]);  // ? CERTO
 void GPIOInitLCD(void);
 char scanKeypad(void);
 void GPIOInitTeclado(void);
 void GPIOInitLedPlaca(void);
 void GPIOInitMotor(void);
-
-void wishedMessage(int grauValue, int sentido, int velocidade, int fim){
-	char message[2][16];
-	// Inicialização message 
-	for(int row = 0; row < 2; row++) {
-		for(int col = 0; col < 16; col++) {
-			message[row][col] = ' ';
-		}
-	}
-	if (fim == 1){
-		strcpy(message[0], "FIM");
-		
-	}
-	else{
-		sprintf(message[0], "G:%03d S:%s", grauValue, sentido == 0 ? "H" : "AH");
-		// Monta segunda linha: V:MP ou V:P
-		sprintf(message[1], "V:%s", velocidade == 0 ? "P" : "MP");
-	
-	}
-	insertMessageLCD(message);
-}
-
-
-		//sprintf(message[0], "Grau:%03d Sent:%s", grauValue, sentido == 0 ? "H" : "AH");
-		// Monta segunda linha: V:MP ou V:P
-		//sprintf(message[1], "Velo:%s----------", velocidade == 0 ? "P" : "MP");
-
+void TurnOnMotor(int sentido, int velocidade, int grau);
 
 
 int main(void)
@@ -63,21 +38,74 @@ int main(void)
 	GPIOInitTeclado();
 	GPIOInitMotor();
 	handleTransistorLed(1);
-	int i = 1;
-	while(1){
-			//char tecla = scanKeypad();
-        //if (tecla != 0) {
-					// Processa imediatamente
-				//	wishedMessage(tecla - '0', 1, 15, 0);
-					// Espera até tecla ser solta, para evitar múltiplas leituras rápidas
-        //}
-			//acendeLed(i);
-			//SysTick_Wait1ms(2000);
-			//i++;
-			//if(i > 8){
-			//		i = 1;
-			//}
+
+	char start = 'X';
+	char digito_1 = 'X';
+	char digito_2 = 'X';
+	char digito_3 = 'X';
+	char velocidade = 'X';
+	char sentido = 'X';
+	char message[2][16];
+	sprintf(message[0], "Press: *");
+	insertMessageLCD(message);
+	
+	while (start == 'X'){
+		start = scanKeypad();
 	}
+	
+	while (digito_1 == 'X'){
+		digito_1 = scanKeypad();
+	}
+	sprintf(message[0], "G:%c__ S:_", digito_1);
+	sprintf(message[1], "Velo:_");
+	insertMessageLCD(message);
+	while (digito_2 == 'X'){
+		digito_2 = scanKeypad();
+	}
+	sprintf(message[0], "G:%c%c_ S:_", digito_1, digito_2);
+	sprintf(message[1], "Velo:_");
+	insertMessageLCD(message);
+	while (digito_3 == 'X'){
+		digito_3 = scanKeypad();
+	}
+	sprintf(message[0], "G:%c%c%c S:_", digito_1, digito_2, digito_3);
+	sprintf(message[1], "Velo:_");
+	insertMessageLCD(message);
+
+	
+	while (sentido == 'X'){
+		sentido = scanKeypad();
+	}
+	
+	sprintf(message[0], "G:%c%c%c S:%c", digito_1, digito_2, digito_3, sentido);
+	sprintf(message[1], "Velo:_");
+	insertMessageLCD(message);
+
+	while (velocidade == 'X'){
+		velocidade = scanKeypad();
+	}
+	sprintf(message[1], "Velo:%c", velocidade);
+	insertMessageLCD(message);
+	
+
+	int grau = (digito_1 - '0') * 100 + (digito_2 - '0') * 10 + (digito_3 - '0');
+	int sentido_int = sentido - '0';
+	int velocidade_int = velocidade - '0';
+
+	flagPiscarLed = 1;
+	TurnOnMotor(sentido_int, velocidade_int, grau);
+	flagPiscarLed = 0;
+  sprintf(message[0], "FIM");
+  insertMessageLCD(message);
+  SysTick_Wait1ms(1000);
+	sprintf(message[0], "Press: *");
+	insertMessageLCD(message);
+	start = 'X';
+  digito_1 =  'X';
+	digito_2 =  'X';
+	digito_3 = 'X';
+  velocidade =  'X';
+	sentido = 'X';
 }
 
 

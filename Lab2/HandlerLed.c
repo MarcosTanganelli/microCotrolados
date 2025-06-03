@@ -82,9 +82,13 @@ void GPIOInitLed(void)
 
 	}
 
-void acendeLed(int numLeds){
+void acendeLedEsquerda(int numLeds){
 
 	switch(numLeds){
+		case 0:
+      GPIO_PORTA_AHB_DATA_R = 0b00000000;   
+			GPIO_PORTQ_DATA_R = 0b00000000;		
+			break;
 		case 1:
       GPIO_PORTA_AHB_DATA_R = 0b10000000;   
 			GPIO_PORTQ_DATA_R = 0b00000000;		
@@ -117,6 +121,49 @@ void acendeLed(int numLeds){
 		case 8:
 			GPIO_PORTA_AHB_DATA_R = 0b11110000;
 			GPIO_PORTQ_DATA_R = 0b00001111;  
+			break;
+		default:
+			break;
+	}
+}
+
+void acendeLedDireita(int numLeds){
+	switch(numLeds){
+		case 0:
+			GPIO_PORTA_AHB_DATA_R = 0b00000000;
+			GPIO_PORTQ_DATA_R = 0b00000000;
+			break;
+		case 1:
+			GPIO_PORTQ_DATA_R = 0b00000001;
+			GPIO_PORTA_AHB_DATA_R = 0b00000000;
+			break;
+		case 2:
+			GPIO_PORTQ_DATA_R = 0b00000011;
+			GPIO_PORTA_AHB_DATA_R = 0b00000000;
+			break;
+		case 3:
+			GPIO_PORTQ_DATA_R = 0b00000111;
+			GPIO_PORTA_AHB_DATA_R = 0b00000000;
+			break;
+		case 4:
+			GPIO_PORTQ_DATA_R = 0b00001111;
+			GPIO_PORTA_AHB_DATA_R = 0b00000000;
+			break;
+		case 5:
+			GPIO_PORTQ_DATA_R = 0b00001111;
+			GPIO_PORTA_AHB_DATA_R = 0b00010000;
+			break;
+		case 6:
+			GPIO_PORTQ_DATA_R = 0b00001111;
+			GPIO_PORTA_AHB_DATA_R = 0b00110000;
+			break;
+		case 7:
+			GPIO_PORTQ_DATA_R = 0b00001111;
+			GPIO_PORTA_AHB_DATA_R = 0b01110000;
+			break;
+		case 8:
+			GPIO_PORTQ_DATA_R = 0b00001111;
+			GPIO_PORTA_AHB_DATA_R = 0b11110000;
 			break;
 		default:
 			break;
