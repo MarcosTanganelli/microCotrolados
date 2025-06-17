@@ -1,24 +1,24 @@
 Dependencies for Project 'exemplo', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 6160000::V6.16::ARMCLANG
-F (.\startup.s)(0x6847888D)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g-IC:\Users\mateu\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129--pd "__UVISION_VERSION SETA 536"--pd "TM4C1294NCPDT SETA 1"--list .\listings\startup.lst--xref -o .\objects\startup.o--depend .\objects\startup.d)
-F (.\utils.s)(0x6847BBFA)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g-IC:\Users\mateu\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129--pd "__UVISION_VERSION SETA 536"--pd "TM4C1294NCPDT SETA 1"--list .\listings\utils.lst--xref -o .\objects\utils.o--depend .\objects\utils.d)
-F (.\main.c)(0x684CF15B)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -IC:/Users/mateu/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="536" -DTM4C1294NCPDT-o ./objects/main.o -MD)
-I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6847D3BE)
+F (.\startup.s)(0x68324651)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g-IC:\Users\Marco\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129--pd "__UVISION_VERSION SETA 536"--pd "TM4C1294NCPDT SETA 1"--list .\listings\startup.lst--xref -o .\objects\startup.o--depend .\objects\startup.d)
+F (.\utils.s)(0x6834FD57)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g-IC:\Users\Marco\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129--pd "__UVISION_VERSION SETA 536"--pd "TM4C1294NCPDT SETA 1"--list .\listings\utils.lst--xref -o .\objects\utils.o--depend .\objects\utils.d)
+F (.\main.c)(0x6850C2F4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -IC:/Users/Marco/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="536" -DTM4C1294NCPDT-o ./objects/main.o -MD)
+I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6035A280)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6035A27A)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6035A284)
-I (uart.h)(0x684CEB3C)
-I (tm4c1294ncpdt.h)(0x6847888D)
-F (.\tm4c1294ncpdt.h)(0x6847888D)()
-F (.\gpio.c)(0x684CE060)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -IC:/Users/mateu/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="536" -DTM4C1294NCPDT-o ./objects/gpio.o -MD)
-I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6847D3BE)
-I (tm4c1294ncpdt.h)(0x6847888D)
-I (lab3.h)(0x684CAC28)
-F (.\adc.c)(0x6847888D)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -IC:/Users/mateu/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="536" -DTM4C1294NCPDT-o ./objects/adc.o -MD)
-I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6847D3BE)
-I (tm4c1294ncpdt.h)(0x6847888D)
-F (.\uart.c)(0x684CE049)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -IC:/Users/mateu/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="536" -DTM4C1294NCPDT-o ./objects/uart.o -MD)
-I (uart.h)(0x684CEB3C)
-I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6847D3BE)
+I (uart.h)(0x6850AE6E)
+I (tm4c1294ncpdt.h)(0x68324651)
+F (.\tm4c1294ncpdt.h)(0x68324651)()
+F (.\gpio.c)(0x6850AE6E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -IC:/Users/Marco/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="536" -DTM4C1294NCPDT-o ./objects/gpio.o -MD)
+I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6035A280)
+I (tm4c1294ncpdt.h)(0x68324651)
+I (lab3.h)(0x6850AE6E)
+F (.\adc.c)(0x6850AE5C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -IC:/Users/Marco/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="536" -DTM4C1294NCPDT-o ./objects/adc.o -MD)
+I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6035A280)
+I (tm4c1294ncpdt.h)(0x68324651)
+F (.\uart.c)(0x6850AE6E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -IC:/Users/Marco/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="536" -DTM4C1294NCPDT-o ./objects/uart.o -MD)
+I (uart.h)(0x6850AE6E)
+I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6035A280)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6035A27A)
-I (tm4c1294ncpdt.h)(0x6847888D)
-F (.\uart.h)(0x684CEB3C)()
+I (tm4c1294ncpdt.h)(0x68324651)
+F (.\uart.h)(0x6850AE6E)()
